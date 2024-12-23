@@ -1,0 +1,106 @@
+from tkinter import *
+
+def airinfo():
+    try:
+        res_data = int(air_quality_entry.get())
+        o3_data = o3_entry.get()
+        no2_data = no2_entry.get()
+        hc_data = hc_entry.get()
+        pm_data = pm_entry.get()
+        pml_data = pml_entry.get()
+        co_data = co_entry.get()
+
+        ar.set(res_data)
+        o3.set(o3_data)
+        no2.set(no2_data)
+        hc.set(hc_data)
+        pm.set(pm_data)
+        pml.set(pml_data)
+        co.set(co_data)
+
+        if res_data <= 50:
+            remark = "Good"
+            impact = "Minimal impact"
+        elif res_data <= 100 and res_data > 51:
+            remark = "Satisfactory"
+            impact = "Minor breathing discomfort to sensetive people"
+        elif res_data <= 200 and res_data >= 101:
+            remark = "Moderate"
+            impact = "Breathing discomfort to most people with lungs,asthma and heart disease"
+        elif res_data <= 400 and res_data >= 201:
+            remark = "Very poor"
+            impact = "Breathing discomfort to most people on prolonged exposure"
+        elif res_data <= 500 and res_data >= 401:
+            remark = "Severe"
+            impact = "Affects healthy people and seriously impacts those with existing diseases"
+        else:
+            remark = "Hazardous"
+            impact = "Serious health effects for everyone"
+
+        res_remark.set(remark)
+        res_imp.set(impact)
+    
+    except ValueError:
+        res_remark.set("N/A")
+        res_imp.set("N/A")
+        
+
+master = Tk()
+master.title("Air Quality Information")
+master.configure(bg='light grey')
+
+ar = StringVar()
+o3 = StringVar()
+no2 = StringVar()
+hc = StringVar()
+pm = StringVar()
+pml = StringVar()
+co = StringVar()
+res_remark = StringVar()
+res_imp = StringVar()
+
+Label(master,text="Air quality index: ",bg="light grey").grid(row=0, sticky=W)
+air_quality_entry = Entry(master, width=20)
+air_quality_entry.grid(row=0, column=1, padx=5, pady=5)
+
+
+Label(master,text="O3 (µg/m3): ",bg="light grey").grid(row=1, sticky=W)
+o3_entry = Entry(master, width=20)
+o3_entry.grid(row=1, column=1, padx=5, pady=5)
+
+Label(master,text="NO2 (µg/m3): ",bg="light grey").grid(row=2, sticky=W)
+no2_entry = Entry(master, width=20)
+no2_entry.grid(row=2, column=1, padx=5, pady=5)
+
+Label(master,text="HC (µg/m3): ",bg="light grey").grid(row=3, sticky=W)
+hc_entry = Entry(master, width=20)
+hc_entry.grid(row=3, column=1, padx=5, pady=5)
+
+Label(master,text="PM2.5 (µg/m3): ",bg="light grey").grid(row=4, sticky=W)
+pm_entry = Entry(master, width=20)
+pm_entry.grid(row=4, column=1, padx=5, pady=5)
+
+Label(master,text="PML (µg/m3): ",bg="light grey").grid(row=5, sticky=W)
+pml_entry = Entry(master, width=20)
+pml_entry.grid(row=5, column=1, padx=5, pady=5)
+
+Label(master,text="CO (µg/m3): ",bg="light grey").grid(row=6, sticky=W)
+co_entry = Entry(master, width=20)
+co_entry.grid(row=6, column=1, padx=5, pady=5)
+
+Label(master, text="Remark: ", bg="light grey").grid(row=7,sticky=W)
+Label(master, text="Posible Health Impacts: ", bg="light grey").grid(row=8, sticky=W)
+
+Label(master,text="", textvariable=ar, bg="light grey").grid(row=0, column=2, sticky=W)
+Label(master,text="", textvariable=o3, bg="light grey").grid(row=1, column=2, sticky=W)
+Label(master,text="", textvariable=no2, bg="light grey").grid(row=2, column=2, sticky=W)
+Label(master,text="", textvariable=hc, bg="light grey").grid(row=3, column=2, sticky=W)
+Label(master,text="", textvariable=pm, bg="light grey").grid(row=4, column=2, sticky=W)
+Label(master,text="", textvariable=pml, bg="light grey").grid(row=5, column=2, sticky=W)
+Label(master,text="", textvariable=co, bg="light grey").grid(row=6, column=2, sticky=W)
+Label(master,text="", textvariable=res_remark, bg="light grey").grid(row=7, column=2, sticky=W)
+Label(master,text="", textvariable=res_imp, bg="light grey").grid(row=8, column=2, sticky=W)
+
+Button(master, text="check", command=airinfo,bg="blue").grid(row=9, column=1, padx=5, pady=5)
+
+mainloop()
